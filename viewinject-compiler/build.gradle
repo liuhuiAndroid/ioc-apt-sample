@@ -4,6 +4,8 @@ targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    // auto-service库可以帮我们去生成META-INF等信息
     compile 'com.google.auto.service:auto-service:1.0-rc2'
+    // 注解处理器依赖注解模块
     compile project (':viewinject-annotation')
 }

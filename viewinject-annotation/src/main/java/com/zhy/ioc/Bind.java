@@ -7,12 +7,17 @@ import java.lang.annotation.Target;
 
 /**
  * Created by zhy on 16/4/22.
+ *
+ * 注解模块的实现
+ *
+ * SOURCE：标记一些信息
+ * RUNTIME：运行时动态处理
+ * CLASS：编译时动态处理
  */
 
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
-public @interface Bind
-{
+public @interface Bind {
     int value();
 }
 

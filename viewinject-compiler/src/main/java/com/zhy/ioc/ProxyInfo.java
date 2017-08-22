@@ -8,8 +8,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
 
-public class ProxyInfo
-{
+public class ProxyInfo {
     private String packageName;
     private String proxyClassName;
     private TypeElement typeElement;
@@ -18,8 +17,7 @@ public class ProxyInfo
 
     public static final String PROXY = "ViewInject";
 
-    public ProxyInfo(Elements elementUtils, TypeElement classElement)
-    {
+    public ProxyInfo(Elements elementUtils, TypeElement classElement) {
         this.typeElement = classElement;
         PackageElement packageElement = elementUtils.getPackageOf(classElement);
         String packageName = packageElement.getQualifiedName().toString();
@@ -30,8 +28,12 @@ public class ProxyInfo
     }
 
 
-    public String generateJavaCode()
-    {
+    /**
+     * 生成java代码
+     * @return
+     */
+    public String generateJavaCode() {
+
         StringBuilder builder = new StringBuilder();
         builder.append("// Generated code. Do not modify!\n");
         builder.append("package ").append(packageName).append(";\n\n");
@@ -50,15 +52,13 @@ public class ProxyInfo
     }
 
 
-    private void generateMethods(StringBuilder builder)
-    {
+    private void generateMethods(StringBuilder builder) {
 
         builder.append("@Override\n ");
         builder.append("public void inject(" + typeElement.getQualifiedName() + " host, Object source ) {\n");
 
 
-        for (int id : injectVariables.keySet())
-        {
+        for (int id : injectVariables.keySet()) {
             VariableElement element = injectVariables.get(id);
             String name = element.getSimpleName().toString();
             String type = element.asType().toString();
@@ -71,22 +71,17 @@ public class ProxyInfo
             builder.append("\n};");
 
 
-
-
-
         }
         builder.append("  }\n");
 
 
     }
 
-    public String getProxyClassFullName()
-    {
+    public String getProxyClassFullName() {
         return packageName + "." + proxyClassName;
     }
 
-    public TypeElement getTypeElement()
-    {
+    public TypeElement getTypeElement() {
         return typeElement;
     }
 
